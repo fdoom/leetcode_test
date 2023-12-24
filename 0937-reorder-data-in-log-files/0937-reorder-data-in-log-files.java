@@ -13,12 +13,11 @@ class Solution {
             String[] s1 = a.split(" ");
             String[] s2 = b.split(" ");
             
-        int compared = Comparator.comparing((String[] arr) -> arr[1])
-                                .thenComparing(arr -> arr[2])
-                                .thenComparingInt(arr -> arr.length)
-                                .thenComparing(arr -> arr[0])
-                                .compare(s1, s2);
-        return compared;
+            return Comparator.comparing((String[] arr) -> arr[1])
+                            .thenComparing(arr -> arr[2])
+                            .thenComparingInt(arr -> arr.length)
+                            .thenComparing(arr -> arr[0])
+                            .compare(s1, s2);
         });
 
         letter.addAll(digit);
