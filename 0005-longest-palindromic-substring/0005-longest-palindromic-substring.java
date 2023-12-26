@@ -1,19 +1,21 @@
 class Solution {
-    public String longestPalindrome(String s) {
-        int max = 0;
-        String answer = "";
-        for(int i = 0; i < s.length(); i++) {
-            char start = s.charAt(i);
-            for(int j = i + 1; j <= s.length(); j++) {
-                if(start != s.charAt(j - 1) || max >= j - i) continue;
-                String temp = s.substring(i, j);
-                StringBuilder sb = new StringBuilder(temp);
-                if(temp.equals(sb.reverse().toString())) {
-                    max = temp.length();
-                    answer = temp;
-                }
-            }
+    int left, len;
+    private void sol(String s, int l, int r) {
+        while(l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
+            l--;
+            r++;
         }
-        return answer;
+        if(len < r - l - 1) {
+            left = l + 1;
+            len = r - l - 1;
+        }
+    }
+    public String longestPalindrome(String s) {
+        if(s.length() == 1) return s;
+        for(int i = 0; i < s.length() - 1; i++) {
+            sol(s, i, i + 1);
+            sol(s, i, i + 2);
+        }
+        return s.substring(left, left + len);
     }
 }
