@@ -4,15 +4,15 @@ class Solution {
         int[] answer = new int[2];
         int diff;
         for(int i = 0; i < nums.length; i++) {
-            if(!map.containsKey(nums[i]))
-                map.put(nums[i], i);
-            
             diff = target - nums[i];
-            if(map.containsKey(diff) && map.get(diff) != i) {
+            if(map.containsKey(diff)) {
                 answer[0] = map.get(diff);
                 answer[1] = i;
                 break;
             }
+
+            if(!map.containsKey(nums[i]))
+                map.put(nums[i], i);
         }
         return answer;
     }
