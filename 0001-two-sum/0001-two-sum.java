@@ -10,9 +10,7 @@ class Solution {
                 answer[1] = i;
                 break;
             }
-
-            if(!map.containsKey(nums[i]))
-                map.put(nums[i], i);
+            map.put(nums[i], i);
         }
         return answer;
     }
