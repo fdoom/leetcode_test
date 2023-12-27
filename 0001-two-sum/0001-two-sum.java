@@ -11,6 +11,7 @@ class Solution {
             if(map.containsKey(diff) && map.get(diff) != i) {
                 answer[0] = i;
                 answer[1] = map.get(diff);
+                break;
             }
         }
         return answer;
