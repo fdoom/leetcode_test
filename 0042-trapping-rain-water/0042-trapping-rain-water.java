@@ -1,20 +1,46 @@
 class Solution {
     public int trap(int[] height) {
-        int volume = 0;
-        int left = 0;
-        int right = height.length - 1;
-        int leftMax = height[left];
-        int rightMax = height[right];
+        int answer = 0;
+        Pointer left = new Pointer(height, 0);
+        Pointer right = new Pointer(height, height.length - 1);
 
-        while(left < right) {
-            leftMax = Math.max(height[left], leftMax);
-            rightMax = Math.max(height[right], rightMax);
+        while(left.index < right.index) {
+            left.maxCheck();
+            right.maxCheck();
 
-            if(leftMax <= rightMax)
-                volume += leftMax - height[left++];
-            else
-                volume += rightMax - height[right--];
+            if(left.max <= right.max) {
+                answer += left.max - left.value();
+                left.move(1);
+            }
+            else {
+                answer += right.max - right.value();
+                right.move(-1);
+            }
         }
-        return volume;
+        return answer;
+    }
+}
+
+class Pointer {
+    int[] height;
+    int index;
+    int max;
+
+    Pointer(int[] height, int index) {
+        this.height = height;
+        this.index = index;
+        max = height[index];
+    }
+
+    void maxCheck() {
+        max = Math.max(height[index], max);
+    }
+
+    void move(int n) {
+        index += n;
+    }
+
+    int value() {
+        return height[index];
     }
 }
