@@ -17,10 +17,9 @@ class Solution {
             head = head.next;
         }
 
-        while(node != null) {
-            if(node.val != d.removeFirst())
+        while(!d.isEmpty() && d.size() > 1) {
+            if(d.removeFirst() != d.removeLast())
                 return false;
-            node = node.next;
         }
         return true;
     }
